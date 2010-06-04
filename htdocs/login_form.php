@@ -34,6 +34,8 @@ if ($app['server']->getAuthType() == 'http') {
 
 	# When we pop up the basic athentication, we come back to this script, so try the login again.
 	if ($app['server']->isLoggedIn('user')) {
+		if (function_exists('run_hook'))
+			run_hook('post_login',array('success'=> true));
 		system_message(array(
 			'title'=>_('Authenticate to server'),
 			'body'=>_('Successfully logged into server.'),

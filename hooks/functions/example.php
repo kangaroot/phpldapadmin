@@ -38,6 +38,42 @@ function example_post_session_init() {
 add_hook('post_session_init','example_post_session_init');
 
 /**
+ * The post_login function is called after the user has (tried to) login.
+ *
+ * Arguments available are:
+ * @param boolean Success
+ */
+function example_post_login() {
+	$args = func_get_args();
+
+	system_message(array(
+		'title'=>sprintf('Hook called [%s]',__METHOD__),
+		'body'=>sprintf('<i>Global Vars</i>: <small>%s</small>',join('| ',array_keys($GLOBALS))),
+		'type'=>'info','special'=>true));
+
+	return true;
+}
+add_hook('post_login','example_post_login');
+
+/**
+ * The post_logout function is called after the user has (tried to) logout.
+ *
+ * Arguments available are:
+ * @param boolean Success
+ */
+function example_post_logout() {
+	$args = func_get_args();
+
+	system_message(array(
+		'title'=>sprintf('Hook called [%s]',__METHOD__),
+		'body'=>sprintf('<i>Global Vars</i>: <small>%s</small>',join('| ',array_keys($GLOBALS))),
+		'type'=>'info','special'=>true));
+
+	return true;
+}
+add_hook('post_logout','example_post_logout');
+
+/**
  * This pre_connect function is called before making a connection to the LDAP server.
  * While PLA makes many calls to connect to the LDAP server, this is called only once
  * when caching is turned on.

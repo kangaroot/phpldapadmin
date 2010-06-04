@@ -22,16 +22,21 @@ if ($user['login'] && ! strlen($user['password']))
 		'type'=>'warn'),
 		sprintf('cmd.php?cmd=login_form&server_id=%s',get_request('server_id','REQUEST')));
 
-if ($app['server']->login($user['login'],$user['password'],'user'))
+if ($app['server']->login($user['login'],$user['password'],'user')) {
+	if (function_exists('run_hook'))
+		run_hook('post_login',array('success'=> true));
 	system_message(array(
 		'title'=>_('Authenticate to server'),
 		'body'=>_('Successfully logged into server.'),
 		'type'=>'info'),
 		sprintf('cmd.php?server_id=%s',get_request('server_id','REQUEST')));
-else
+} else {
+	if (function_exists('run_hook'))
+		run_hook('post_login',array('success'=> false));
 	system_message(array(
 		'title'=>_('Failed to Authenticate to server'),
 		'body'=>_('Invalid Username or Password.'),
 		'type'=>'error'),
 		sprintf('cmd.php?cmd=login_form&server_id=%s',get_request('server_id','REQUEST')));
+}
 ?>
