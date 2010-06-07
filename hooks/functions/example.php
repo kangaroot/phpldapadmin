@@ -41,6 +41,7 @@ add_hook('post_session_init','example_post_session_init');
  * The post_login function is called after the user has (tried to) login.
  *
  * Arguments available are:
+ * @param string Username
  * @param boolean Success
  */
 function example_post_login() {
@@ -59,6 +60,7 @@ add_hook('post_login','example_post_login');
  * The post_logout function is called after the user has (tried to) logout.
  *
  * Arguments available are:
+ * @param string Username
  * @param boolean Success
  */
 function example_post_logout() {

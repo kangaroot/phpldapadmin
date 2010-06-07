@@ -24,7 +24,7 @@ if ($user['login'] && ! strlen($user['password']))
 
 if ($app['server']->login($user['login'],$user['password'],'user')) {
 	if (function_exists('run_hook'))
-		run_hook('post_login',array('success'=> true));
+		run_hook('post_login',array('user' => $user['login'], 'success'=> true));
 	system_message(array(
 		'title'=>_('Authenticate to server'),
 		'body'=>_('Successfully logged into server.'),
@@ -32,7 +32,7 @@ if ($app['server']->login($user['login'],$user['password'],'user')) {
 		sprintf('cmd.php?server_id=%s',get_request('server_id','REQUEST')));
 } else {
 	if (function_exists('run_hook'))
-		run_hook('post_login',array('success'=> false));
+		run_hook('post_login',array('user' => $user['login'], 'success'=> false));
 	system_message(array(
 		'title'=>_('Failed to Authenticate to server'),
 		'body'=>_('Invalid Username or Password.'),
