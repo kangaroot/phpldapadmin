@@ -28,12 +28,12 @@ function log_change ($str) {
 
 function log_login() {
 	$args = func_get_args();
-	return log_change ("User Login: Name: " . $args[0] . ', ' . ( $args[1] ? 'success' : 'failed'));
+	return log_change ("User Login: Name: " . ($args[0] ? $args[0] : '<anonymous>') . ', ' . ( $args[1] ? 'success' : 'failed'));
 }
 
 function log_logout() {
 	$args = func_get_args();
-	return log_change ("User Logout: Name: " . $args[0] . ', ' . ( $args[1] ? 'success' : 'failed'));
+	return log_change ("User Logout: Name: " . ($args[0] ? $args[0] : '<anonymous>') . ', ' . ( $args[1] ? 'success' : 'failed'));
 }
 
 function log_entry_created() {
