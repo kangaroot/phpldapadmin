@@ -402,6 +402,17 @@ class Config {
 			'desc'=>'Whether to append to the debug file, or create it fresh each time',
 			'default'=>true);
 
+		## Logging Attributes
+		$this->default->log['file'] = array (
+			'desc'=>'Name of the file to log change/auth statements to',
+			'default' => '/var/log/pla.log');
+		$this->default->log['auth'] = array (
+			'desc'=>'Whether to log user logins/logouts',
+			'default' => false);
+		$this->default->log['changes'] = array (
+			'desc' => 'Whether to log changes (entries, deletes, renames, ...)',
+			'default' => false);
+
 		## Temp Directories
 		/** JPEG TMPDir
 		 * This directory must be readable and writable by your web server

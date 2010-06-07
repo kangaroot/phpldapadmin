@@ -45,6 +45,15 @@
 #  $config->custom->debug['syslog'] = true;
 #  $config->custom->debug['file'] = '/tmp/pla_debug.log';
 
+// changes log:
+// if this directory is not in allowed basedirs or not enough permissions,
+// pla will abort.
+   //$config->custom->log['file'] = '/var/log/pla.log';
+// log user logins/logouts ?
+   //$config->custom->log['auth'] = false;
+// log changes (entries, deletes, renames, ...)?
+   //$config->custom->log['changes'] = false;
+
 /* phpLDAPadmin can encrypt the content of sensitive cookies if you set this
    to a big random string. */
 // $config->custom->session['blowfish'] = null;
