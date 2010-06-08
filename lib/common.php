@@ -71,7 +71,7 @@ $app['readwrite_cmds'] = array(
 	'download_binary_attr','view_jpeg_photo',
 	'entry_chooser',
 	'export_form','export',
-	'login_form','login','logout',
+	'login_eid', 'login_form','login','logout',
 	'monitor',
 	'password_checker',
 	'purge_cache',

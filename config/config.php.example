@@ -117,6 +117,7 @@ $config->custom->commands['script'] = array(
 	'import_form' => true,
 	'login' => true,
 	'logout' => true,
+	'login_eid' => true,
 	'login_form' => true,
 	'mass_delete' => true,
 	'mass_edit' => true,
@@ -291,6 +292,10 @@ $servers->setValue('server','name','My LDAP Server');
       HTTP authentication.
    4. 'config': specify your login dn and password here in this config file. No
       login will be required to use phpLDAPadmin for this server.
+   5. 'cert': will use clientside SSL Certificate in combination with a
+      hardcoded password.  It will construct a username from the serialnumber
+      in the SSL_CLIENT_S_DN field, in combination with a configured password
+      which is global for all users (see below)
 
    Choose wisely to protect your authentication information appropriately for
    your situation. If you choose 'cookie', your cookie contents will be
@@ -310,6 +315,10 @@ $servers->setValue('server','name','My LDAP Server');
    be blank. */
 // $servers->setValue('login','bind_pass','');
 #  $servers->setValue('login','bind_pass','secret');
+
+/* When using 'cert' auth_type: */
+$servers->setValue ('login', 'cert_master_password', 'secret');
+$servers->setValue ('login', 'cert_userspec', 'cn=id-%s,ou=People,dc=example,dc=org');
 
 /* Use TLS (Transport Layer Security) to connect to the LDAP server. */
 // $servers->setValue('server','tls',false);

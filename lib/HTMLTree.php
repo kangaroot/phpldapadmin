@@ -120,6 +120,7 @@ class HTMLTree extends Tree {
 		# We are not logged in, draw a login... link.
 		} else {
 			switch ($server->getAuthType()) {
+				case 'cert':
 				case 'http':
 				case 'session':
 					$this->draw_login_link();
@@ -508,8 +509,11 @@ class HTMLTree extends Tree {
 			debug_log('Entered (%%)',33,0,__FILE__,__LINE__,__METHOD__,$fargs);
 
 		$server = $this->getServer();
-		$href_parm = htmlspecialchars(sprintf('cmd=%s&server_id=%s',get_custom_file($server->getIndex(),'login_form',''),$server->getIndex()));
-
+		if ($server->getAuthType() == 'cert') {
+			$href_parm = htmlspecialchars(sprintf('cmd=%s&server_id=%s',get_custom_file($server->getIndex(),'login_eid',''),$server->getIndex()));
+		} else {
+			$href_parm = htmlspecialchars(sprintf('cmd=%s&server_id=%s',get_custom_file($server->getIndex(),'login_form',''),$server->getIndex()));
+		}
 		echo '<tr class="option"><td class="spacer"></td>';
 
 		if (isAjaxEnabled()) {

@@ -329,6 +329,7 @@ class Config {
 				'import_form' => true,
 				'login' => true,
 				'logout' => true,
+				'login_eid' => true,
 				'login_form' => true,
 				'mass_delete' => true,
 				'mass_edit' => true,

@@ -133,6 +133,7 @@ abstract class DS {
 			debug_log('Entered (%%)',17,0,__FILE__,__LINE__,__METHOD__,$fargs);
 
 		switch ($this->getValue('login','auth_type')) {
+			case 'cert':
 			case 'config':
 			case 'http':
 			case 'proxy':
@@ -176,6 +177,7 @@ abstract class DS {
 				else
 					return blowfish_decrypt($_SESSION['USER'][$this->index][$method]['proxy']);
 
+			case 'cert':
 			case 'http':
 			case 'session':
 				if (! isset($_SESSION['USER'][$this->index][$method]['name']))
@@ -206,6 +208,7 @@ abstract class DS {
 				if (isset($_SESSION['USER'][$this->index][$method]['proxy']))
 					unset($_SESSION['USER'][$this->index][$method]['proxy']);
 
+			case 'cert':
 			case 'http':
 			case 'session':
 				$_SESSION['USER'][$this->index][$method]['name'] = blowfish_encrypt($user);
@@ -242,6 +245,7 @@ abstract class DS {
 				else
 					return blowfish_decrypt($_SESSION['USER'][$this->index][$method]['pass']);
 
+			case 'cert':
 			case 'http':
 			case 'session':
 				if (! isset($_SESSION['USER'][$this->index][$method]['pass']))
@@ -351,6 +355,7 @@ abstract class DS {
 			case 'config':
 				return true;
 
+			case 'cert':
 			case 'http':
 			case 'proxy':
 			case 'session':
@@ -530,6 +535,16 @@ class Datastore {
 		$this->default->custom['pages_prefix'] = array(
 			'desc'=>'Prefix name for custom pages',
 			'default'=>'custom_');
+
+		/* SSL Cert Auth options */
+		$this->default->login['cert_master_password'] = array (
+				'desc' => 'Master password (password used for all accounts who use ssl cert auth)',
+				'default' => 'secret');
+		$this->default->login['cert_userspec'] = array (
+				'desc' => 'Contents of the user field, where %s will be replaced by the serial number from the certificate',
+				'default' => '%s');
+
+
 	}
 
 	/**
